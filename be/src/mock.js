@@ -1,3 +1,6 @@
+const orm = smartRequire('orm');
+const proxy = require('koa-server-http-proxy');
+const handleResponse = require('./handleResponse');
 module.exports = function (app) {
     // mock请求不能被任何的拦截
     app.use(async function (ctx, next) {
