@@ -1,7 +1,7 @@
 ## Demo
 ![Demo image](https://raw.githubusercontent.com/lirongfei123/mock-pro/master/example.jpg)
 
-[Demo地址](https://mock.mlife.top){:target="_blank"}
+[Demo地址](https://mock.mlife.top)
 
 ## usage
 ### 开发

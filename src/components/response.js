@@ -45,7 +45,7 @@ class Response extends Component {
         const responses = [];
         this.props.responses.forEach((value) => {
             responses.push(
-                <FormControlLabel key={value.id} value={value.id.toString()} control={<Radio />} label={`${value.name} - ${value.type===1?'静态数据':'动态转发'}`} />
+                <FormControlLabel key={value.id} value={value.id.toString()} control={<Radio />} label={`${value.name} - ${value.type===1?'静态数据':'动态脚本'}`} />
             );
         });
         responses.push(
