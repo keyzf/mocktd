@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PropChecks from 'prop-checks';
 import Grid from 'gmater/Grid';
 import Paper from 'gmater/Paper';
 import AppBar from 'gmater/AppBar';
@@ -82,7 +83,7 @@ class Interfaces extends Component {
         )
     }
     static requireProps = {
-        currentProject: PropTypes.object.isRequired
+        currentProject: PropChecks.object.isRequired
     }
     delInterface() {
         const result = confirm('你确定要删除吗？');

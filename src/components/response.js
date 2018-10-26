@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PropChecks from 'prop-checks';
 import Radio from 'gmater/Radio';
 import RadioGroup from 'gmater/RadioGroup';
 import FormControlLabel from 'gmater/FormControlLabel';
@@ -31,7 +32,7 @@ class Response extends Component {
         }
     ]
     static requireProps = {
-        responses: PropTypes.array.isRequired
+        responses: PropChecks.array.isRequired
     }
     handleChange(e, responseType) {
         this.props.dispatch('interface/changeResponseType', {

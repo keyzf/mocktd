@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-checks';
 import Button from 'gmater/Button';
 import Dialog from 'gmater/Dialog';
 import DialogActions from 'gmater/DialogActions';

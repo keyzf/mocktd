@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PropChecks from 'prop-checks';
 import TextField from 'gmater/TextField';
 import { withStyles } from 'gmater/styles'; 
 import { connect } from '../createProvider';
@@ -37,7 +38,7 @@ class InterfaceDetail extends Component {
         },
     ]
     static requireProps = {
-        currentInterface: PropTypes.object.isRequired
+        currentInterface: PropChecks.object.isRequired
     };
     componentWillReceiveProps(props) {
         if (diff(props.currentInterface, this.props.currentInterface)) {

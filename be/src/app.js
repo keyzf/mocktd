@@ -21,8 +21,6 @@ const orm = smartRequire('orm');
 const handleResponse = require('./handleResponse');
 const mockMiddleware  = require('./mock');
 const session = require('koa-session');
-// console.log('the dirname', __dirname);
-// global.appRoot = '/home/jeffchung/work/source/web/js/personal/koa2-startkit';
 global.srcRoot = __dirname;
 const config = smartRequire('config');
 
@@ -36,9 +34,7 @@ const bodyparser = Bodyparser();
 
 //create sequelize object and load sequelize models in global scope
 smartRequire('services/orm/sequelize.js');
-// app.use(async function (ctx, next){
-//   console.log('23523423');
-// });
+
 // middlewares
 app.use(cors());
 app.use(convert(bodyparser));
@@ -95,14 +91,12 @@ app.use(
     })
   )
 );
-// views
+// // views
 app.use(
   views(path.join(__dirname, '../../dist'), {
     extension: 'html',
   })
 );
-//
-//
 
 // http status logger response
 app.use(async (ctx, next) => {
@@ -127,14 +121,13 @@ app.use(async (ctx, next) => {
 app.use(async (ctx, next) => {
   await smartRequire('routes').routes()(ctx, next);
 });
-app.use(async (ctx, next) => {
-  await smartRequire('routes').allowedMethods();
-});
 // historyFallback
 app.use(async (ctx, next) => {
-  ctx.render('index.html');
+  await ctx.render('index');
 });
-
+// app.use(async (ctx, next) => {
+//   await smartRequire('routes').allowedMethods();
+// });
 const port = parseInt(config.port || '3000');
 const server = http.createServer(app.callback());
 

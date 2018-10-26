@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PropChecks from 'prop-checks';
 import List from 'gmater/List';
 import ListItem from 'gmater/ListItem';
 import ListItemText from 'gmater/ListItemText';
@@ -34,7 +35,7 @@ class Project extends Component {
         }
     ];
     static requireProps = {
-        userInfo: PropTypes.object.isRequired
+        userInfo: PropChecks.object.isRequired
     }
     render() {
         const {classes} = this.props;
