@@ -19,6 +19,7 @@ const router = Router();
 require('./smartRequire');
 const orm = smartRequire('orm');
 const handleResponse = require('./handleResponse');
+const mockMiddleware  = require('./mock');
 const session = require('koa-session');
 // console.log('the dirname', __dirname);
 // global.appRoot = '/home/jeffchung/work/source/web/js/personal/koa2-startkit';
@@ -26,45 +27,7 @@ global.srcRoot = __dirname;
 const config = smartRequire('config');
 
 const app = new Koa();
-// mock请求不能被任何的拦截
-app.use(async function(ctx, next) {
-  if (/^\/mock/.test(ctx.request.url)) {
-    if (ctx.request.path.split('/') < 4) {
-      ctx.body = 'url不符合要求';
-    } else {
-      const requestPath = ctx.request.path.split('/').slice(2).join('/');
-      const interfaceObj = await orm.Interface.findOne({
-        where: {
-          url2: requestPath
-        }
-      });
-      const responseId = interfaceObj.responseType;
-      if (responseId == 0) {
-        const currentProject = await orm.Project.findOne({
-          where: {
-            id: interfaceObj.projectId
-          }
-        });
-        await proxy({
-          target: currentProject.host,
-          pathRewrite: {
-            [`^/mock/${currentProject.url}`]: '/'
-          },
-          changeOrigin: true
-        })(ctx, next);
-        return;
-      }
-      const responseObj = await orm.Response.findOne({
-        where: {
-          id: responseId
-        }
-      });
-      await handleResponse(ctx, responseObj.type, responseObj.content);
-    }
-  } else {
-    await next();
-  }
-});
+mockMiddleware(app);
 app.keys = ['keyboard cat'];
 app.use(session({
 }, app));
@@ -125,11 +88,17 @@ app.use(
     })
   )
 );
-
+app.use(
+  convert(
+    koaStatic(path.join(__dirname, '../../dist'), {
+      pathPrefix: '/dist',
+    })
+  )
+);
 // views
 app.use(
-  views(path.join(__dirname, '../views'), {
-    extension: 'ejs',
+  views(path.join(__dirname, '../../dist'), {
+    extension: 'html',
   })
 );
 //
@@ -161,10 +130,9 @@ app.use(async (ctx, next) => {
 app.use(async (ctx, next) => {
   await smartRequire('routes').allowedMethods();
 });
-// database
+// historyFallback
 app.use(async (ctx, next) => {
-  console.log('middle ware');
-  await next();
+  ctx.render('index.html');
 });
 
 const port = parseInt(config.port || '3000');

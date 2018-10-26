@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node shell/start.js"
+    "start": "node shell/start.js",
+    "build": "webpack --config tools/webpack.config.js --release"
   },
   "author": "李荣平 <rongping.lrp@gamil.com> (https://github.com/lirongfei123)",
   "homepage": "https://github.com/lirongfei123/mock-pro",

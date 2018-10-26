@@ -3,7 +3,7 @@ const axios = require('axios');
 export function ajax(config) {
     return new Promise(function (resolve, reject) {
         axios(Object.assign({
-            baseURL: '/api/',
+            baseURL: ENV ? '/api/' : '/',
             transformRequest: [function (data) {
                 return data;
             }],
