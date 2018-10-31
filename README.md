@@ -1,12 +1,12 @@
 ## Demo
 ![Demo image](https://raw.githubusercontent.com/lirongfei123/mock-pro/master/example.jpg)
 
-[Demo地址](https://mock.mlife.top)
+[Demo地址](https://mockdemo.mlife.top)
 
 ## usage
 ### 开发
 #### 下载源码
-git clone git@github.com:lirongfei123/mock-pro.git
+git clone git@github.com:lirongfei123/mocktd.git
 
 cd mock-pro
 #### 数据库
